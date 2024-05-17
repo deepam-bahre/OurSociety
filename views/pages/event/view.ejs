@@ -1,0 +1,112 @@
+<%- include('../../partials/header'); %> 
+<div class="bcm_view-recipt">
+   <div class="container">
+      <h3>View Events:</h3>
+      <% if (event.length) { %>
+      <ul>
+         <li class="todo">
+            <label>
+               <table class="table table-responsive table-bordered">
+                  <thead>
+                     <tr>
+                        <th></th>
+                        <th>Evant Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Location</th>
+                        <th>Contact Person</th>
+                        <th>time</th>
+                        <th>Completed</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% event.map((result)=>{%>
+                     <tr>
+                        <form action="/completeEvent" method="POST">
+                           <% if (result.completed) { %>
+                           <td>
+                              <input type="checkbox" checked name="completed" class="completed">
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.name%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.description%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.price%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.location%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.arragedBy%>
+                              </span>
+                           </td>
+                           <td style="min-width:200px">
+                              <span class="completed"><%=result.time%></span>
+                           </td>
+                           <% } else { %>
+                           <td>
+                              <input type="checkbox" name="completed">
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.name%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.description%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.price%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.location%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.arragedBy%>
+                              </span>
+                           </td>
+                           <td style="min-width:200px">
+                              <span><%=result.time%></span>
+                           </td>
+                           <td>
+                              <span><img src="<%=result.image%>" class="img-fluid"
+                                 id="image"></span>
+                           </td>
+                           <% } %>
+                           <td><input type="hidden" value="<%=result._id%>" name="id">
+                              <button class="btn btn-small bcm-btn-red"><i class="fas fa-check"></i></button>
+                           </td>
+                        </form>
+                     </tr>
+                     <% }) %>
+                  </tbody>
+               </table>
+            </label>
+         </li>
+         
+      </ul>
+      <% } else { %>
+      <p>No Events Currently!</p>
+      <% } %>
+   </div>
+</div>
+<%- include('../../partials/footer'); %>

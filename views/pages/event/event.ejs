@@ -1,0 +1,194 @@
+<%- include('../../partials/header'); %> 
+<% if(message.eventSuccess){ %>
+   <div class="alert alert-success" role="alert" id="successMessage">
+       <%= message.eventSuccess %>
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+   </div>
+   <% } %>
+   <style>
+      td,
+   input,
+   th {
+   font-size: inherit !important;
+   }
+   </style>
+<div class="bcm_view-recipt">
+   <div class="container">
+      <h3>View Event:</h3>
+      <% if (event.length >0) { %>
+      <ul>
+         <li class="todo">
+            <label class="table-responsive">
+               <table class="table table-bordered">
+                  <thead>
+                     <tr>
+                        <th></th>
+                        <th>Evant Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Location</th>
+                        <th>Contact Person</th>
+                        <th>time</th>
+                        <th>image</th>
+                        <th>Completed</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% event.map((result)=>{%>
+                     <tr>
+                        <form action="/completeEvent" method="POST">
+                           <% if (result.completed) { %>
+                           <td>
+                              <input type="checkbox" checked name="completed" class="completed">
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.name%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.description%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.price%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.location%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.arragedBy%>
+                              </span>
+                           </td>
+                           <td style="min-width:200px">
+                              <span  class="completed"><%= moment(result.time).format('DD MMM YYYY hh:mm a') %></span> 
+                           </td>
+                           <td>
+                              <span class="completed"><img src="<%=result.image%>"
+                                 class="img-fluid" id="image"></span>
+                           </td>
+                           <% } else { %>
+                           <td>
+                              <input type="checkbox" name="completed">
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.name%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.description%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.price%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.location%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.arragedBy%>
+                              </span>
+                           </td>
+                           <td style="min-width:200px">
+                              <span><%= moment(result.time).format('DD MMM YYYY hh:mm a') %></span>       
+                           </td>
+                           <td>
+                              <span><img src="<%=result.image%>" class="img-fluid"
+                                 id="image"></span>
+                           </td>
+                           <% } %>
+                           <td><input type="hidden" value="<%=result._id%>" name="id">
+                              <button class="btn btn-small bcm-btn-red"><i class="fas fa-check"></i></button>
+                           </td>
+                        </form>
+                        <td>
+                           <button class="btn btn-small bcm-btn-red" data-toggle="modal" data-target="#eventModal<%=result._id%>" data-backdrop="static" data-keyboard="false"> <i class="fas fa-pencil-alt"></i> </button>
+                           <div id="eventModal<%=result._id%>" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                       <h4 class="modal-title">Update Data</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form action="/updateEvent" method="POST" enctype='multipart/form-data'>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Event Name" name="name" value="<%=result.name%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Description" name="description" value="<%=result.description%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Amount" name="price" value="<%=result.price%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Location" name="location" value="<%=result.location%>" required> 
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Contact Person" name="arragedBy" value="<%=result.arragedBy%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input id="party<%=result._id%>" class="form-control" type="datetime-local" name="time">  
+                                          </div> 
+                                          <div class="form-group">
+                                             <input class="form-control" type="file" name="image" id="image" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="hidden" value="<%=result._id%>" name="id">
+                                             <button class="btn btn-small bcm-btn-red"  type="submit">update</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </td>
+                        <td>
+                           <form action="/deleteEvent" method="POST">
+                              <input type="hidden" value="<%=result._id%>" name="id">
+                              <button class="btn btn-small bcm-btn-red" type="submit"><i class="fas fa-trash-alt"></i></button>
+                           </form>
+                        </td>
+                     </tr>
+                     <% }) %>
+                  </tbody>
+               </table>
+            </label>
+         </li>
+         
+      </ul>
+      <% } else { %>
+      <p>No Events Currently!</p>
+      <% } %>
+   </div>
+</div>
+<%- include('../../partials/footer'); %>
+<% event.map((result)=>{%>
+<script type="text/javascript">
+var now = new Date();
+now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+document.getElementById('party<%=result._id%>').value = now.toISOString().slice(0,16);
+ </script>
+<% }) %>
+<script type="text/javascript">
+   setTimeout(function () {
+       // Closing the alert
+       $(' #successMessage').alert('close');
+   },3000);
+</script>

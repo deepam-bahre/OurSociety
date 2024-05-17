@@ -1,0 +1,77 @@
+<%- include('../../partials/header'); %> 
+<% if(message.rceiptSuccess){ %>
+   <div class="alert alert-success" role="alert" id="successMessage">
+       <%= message.rceiptSuccess %>
+       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">×</span>
+   </div>
+   <% } %>
+<div class="bcm_view-recipt">
+   <div class="container">
+      <h3>View Receipts:</h3>
+      <% if (userReceipt.length) { %>
+               <table class="table table-responsive table-bordered user-recept-view">
+                  <thead>
+                     <tr>
+                        <th>Full Name</th>
+                        <th>Amount</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Occasion</th>
+                        <th>familyMembers</th>
+                        <th>image</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% userReceipt.map((result)=>{%>
+                     <tr>
+                           <td>
+                              <span>
+                              <%=result.fullName%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.amount%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.phone%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.address%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.occasion%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.familyMembers%>
+                              </span>
+                           </td>
+                           <td>
+                              <span><img src="<%=result.image%>" class="img-fluid"
+                                 id="image"></span>
+                           </td>
+                     </tr>
+                     <% }) %>
+                  </tbody>
+               </table>
+      <% } else { %>
+      <p>No Receipts!</p>
+      <% } %>
+   </div>
+</div>
+<%- include('../../partials/footer'); %>
+<script type="text/javascript">
+   setTimeout(function () {
+       // Closing the alert
+       $(' #successMessage').alert('close');
+   },3000);
+</script>

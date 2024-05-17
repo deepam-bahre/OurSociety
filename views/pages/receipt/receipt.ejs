@@ -1,0 +1,179 @@
+<%- include('../../partials/header'); %> 
+<div class="bcm_view-recipt">
+   <div class="container">
+      <h3>View Receipts:</h3>
+      <% if (todos.length >0) { %>
+      <ul>
+         <li class="todo">
+            <label class="table-responsive">
+               <table class="table table-bordered">
+                  <thead>
+                     <tr>
+                        <th></th>
+                        <th>Full Name</th>
+                        <th>Amount</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Occasion</th>
+                        <th>familyMembers</th>
+                        <th>image</th>
+                        <th>Completed</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <% todos.map((result)=>{%>
+                     <tr>
+                        <form action="/complete" method="POST">
+                           <% if (result.completed) { %>
+                           <td>
+                              <input type="checkbox" checked name="completed" class="completed">
+                           </td>
+                           <td style="max-width:150px;">
+                              <span class="completed">
+                              <%=result.fullName%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.amount%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.phone%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed" style="max-width:200px;">
+                              <%=result.address%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.occasion%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed">
+                              <%=result.familyMembers%>
+                              </span>
+                           </td>
+                           <td>
+                              <span class="completed"><img src="<%=result.image%>"
+                                 class="img-fluid" id="image"></span>
+                           </td>
+                           <% } else { %>
+                           <td>
+                              <input type="checkbox" name="completed">
+                           </td>
+                           <td style="max-width:150px;">
+                              <span>
+                              <%=result.fullName%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.amount%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.phone%>
+                              </span>
+                           </td>
+                           <td>
+                              <span style="max-width:200px;">
+                              <%=result.address%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.occasion%>
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                              <%=result.familyMembers%>
+                              </span>
+                           </td>
+                           <td>
+                              <span><img src="<%=result.image%>" class="img-fluid"
+                                 id="image"></span>
+                           </td>
+                           <% } %>
+                           <td><input type="hidden" value="<%=result._id%>" name="id">
+                              <button class="btn btn-small bcm-btn-red"><i class="fas fa-check"></i></button>
+                           </td>
+                        </form>
+                        <td>
+                           <button class="btn btn-small bcm-btn-red" data-toggle="modal" data-target="#myModal<%=result._id%>" data-backdrop="static" data-keyboard="false"> <i class="fas fa-pencil-alt"></i> </button>
+                           <div id="myModal<%=result._id%>" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                       <h4 class="modal-title">Update Data</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form action="/update" method="POST" enctype='multipart/form-data'>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Full Name" name="fullName" value="<%=result.fullName%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Amount" name="amount" value="<%=result.amount%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Phone" name="phone" value="<%=result.phone%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Address" name="address" value="<%=result.address%>" required> 
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Occasion" name="occasion" value="<%=result.occasion%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="text" class="form-control" placeholder="Family Members" name="familyMembers" value="<%=result.familyMembers%>" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input class="form-control" type="file" name="image" id="image" required>
+                                          </div>
+                                          <div class="form-group">
+                                             <input type="hidden" value="<%=result._id%>" name="id">
+                                             <button class="btn btn-small bcm-btn-red"  type="submit">update</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </td>
+                        <td>
+                           <form action="/delete" method="POST">
+                              <input type="hidden" value="<%=result._id%>" name="id">
+                              <button class="btn btn-small bcm-btn-red" type="submit"><i class="fas fa-trash-alt"></i></button>
+                           </form>
+                        </td>
+                     </tr>
+                     <% }) %>
+                  </tbody>
+               </table>
+            </label>
+         </li>
+            <% getAllCount.map((count)=>{%>
+               <p><b>Total Amount: </b><%=count.TotalSum%></p>
+            <% }) %>
+            <% getNotCompletedCount.map((count)=>{%>
+               <p><b>Remaining Amount: </b><%=count.TotalSum%></p>
+            <% }) %>
+         <br></br>
+      </ul>
+      <% } else { %>
+      <p>No Receipts!</p>
+      <% } %>
+      <% todos.map((result2)=>{%>
+      <% }) %>
+   </div>
+</div>
+<%- include('../../partials/footer'); %>

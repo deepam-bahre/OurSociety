@@ -1,0 +1,126 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bcm-navbar">
+   <div class="navbar-header">
+   <a class="navbar-brand" href="/"><img class="bcm-brand-logo" src="./images/logo1.png"></a>
+   <button class="navbar-toggler  ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+   </button>
+</div>
+   <div id="navbarNavDropdown" class="navbar-collapse collapse">
+       <ul class="navbar-nav mr-auto">
+           
+       </ul>
+       <ul class="navbar-nav">
+           <% if (user) { %>
+
+          <% switch (user.role) {
+    case 0 : %>
+    <li class="nav-item" id="home"><a class="dropdown-item" href="/">Home</a></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Receipts
+       <span class="caret"></span></a>
+    <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                   <a class="dropdown-item" href="/receipt">update Receipts</a>
+                   <a class="dropdown-item" href="/view">Completed Receipts</a>
+             <a class="dropdown-item" href="/createReceipt">Create Receipts</a>
+                   <a class="dropdown-item" href="/userReceipt">View your Receipts</a>
+               </div>
+    </li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Events
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+          <a class="dropdown-item" href="/event">Update Events</a>
+          <a class="dropdown-item" href="/create">Create Events</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/usersList">Change Role</a></li>
+    <li class="nav-item"><a class="dropdown-item" href="/activeUser">Active User</a></li>
+    <li class="nav-item"><a class="dropdown-item" href="/helping">Help</a></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Services & Complaints
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+          <a class="dropdown-item" href="/requirement">Requirement</a>
+       <a class="dropdown-item" href="/createRequirement">Create Requirement</a>
+       <a class="dropdown-item" href="/complaint">Complaint</a>
+       <a class="dropdown-item" href="/createComplaint">Create Complaint</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/profile">Profile</a></li>
+    <li class="nav-item"><a class="dropdown-item" href="/logout">Logout</a></li>
+            <% break;
+    
+    case 1 : %>
+    <li class="nav-item"><a class="dropdown-item" href="/">Home</a></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Receipts
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
+          <a class="dropdown-item" href="/receipt">update Receipts</a>
+          <a class="dropdown-item" href="/view">Completed Receipts</a>
+          <a class="dropdown-item" href="/createReceipt">Create Receipts</a>
+          <a class="dropdown-item" href="/userReceipt">View your Receipts</a>
+       </div>
+    </li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Events
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink5">
+          <a class="dropdown-item" href="/event">Update Events</a>
+          <a class="dropdown-item" href="/create">Create Events</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/helping">Help</a></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Services & Complaints
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink6">
+          <a class="dropdown-item" href="/requirement">Requirement</a>
+       <a class="dropdown-item" href="/createRequirement">Create Requirement</a>
+       <a class="dropdown-item" href="/complaint">Complaint</a>
+       <a class="dropdown-item" href="/createComplaint">Create Complaint</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/profile">Profile</a></li>
+    <li class="nav-item"><a class="dropdown-item" href="/logout">Logout</a></li>
+            <% break;
+    
+    default : %>
+    <li class="nav-item"><a class="dropdown-item" href="/">Home</a></li></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Receipts
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink7">
+          <a class="dropdown-item" href="/createReceipt">Create Receipts</a>
+          <a class="dropdown-item" href="/userReceipt">View your Receipts</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/helping">Help</a></li>
+    <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Services & Complaints
+       <span class="caret"></span></a>
+       <div class="dropdown-menu bcm-dropdown-menu" aria-labelledby="navbarDropdownMenuLink8">
+          <a class="dropdown-item" href="/createRequirement">Create Requirement</a>
+       <a class="dropdown-item" href="/createComplaint">Create Complaint</a>
+       </div>
+    </li>
+    <li class="nav-item"><a class="dropdown-item" href="/profile">Profile</a></li>
+    <li class="nav-item"><a class="dropdown-item" href="/logout">Logout</a></li>
+            <% break;
+    
+    } %>
+       
+       <% } else { %>
+       <li class="nav-item"><a class="dropdown-item" href="/">Home</a></li>
+       <li class="nav-item"><a class="dropdown-item" href="/login">Login</a></li>
+       <li class="nav-item"><a class="dropdown-item" href="/register">Register</a></li>
+       <% } %>
+       </ul>
+   </div>
+</nav>
+
+
+ 
+
+ 
